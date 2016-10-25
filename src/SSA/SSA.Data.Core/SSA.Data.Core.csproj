@@ -51,11 +51,21 @@
   <ItemGroup>
     <Compile Include="BaseRepo\BaseRepository.cs" />
     <Compile Include="BaseRepo\IBaseRepository.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IAuditedEntity.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="IDeletableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SSA.Core\SSA.Core.csproj">
+      <Project>{26df1d48-cfcc-47dc-8de0-a73357c2db28}</Project>
+      <Name>SSA.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

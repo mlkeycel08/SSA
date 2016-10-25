@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -83,14 +87,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiResponse.cs" />
-    <Compile Include="ApiResponseException.cs" />
+    <Compile Include="ApiModels\ApiResponse.cs" />
+    <Compile Include="ApiModels\ApiResponseException.cs" />
+    <Compile Include="ApiModels\ApiLog.cs" />
+    <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ExceptionHandlingAttribute.cs" />
+    <Compile Include="Handlers\ApiResponseHandler.cs" />
+    <Compile Include="Handlers\ApiLogHandler.cs" />
     <Compile Include="JsonErrorResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SSA.Core\SSA.Core.csproj">
+      <Project>{26DF1D48-CFCC-47DC-8DE0-A73357C2DB28}</Project>
+      <Name>SSA.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

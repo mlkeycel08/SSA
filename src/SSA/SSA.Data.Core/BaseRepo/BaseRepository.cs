@@ -4,10 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using SSA.Core.Extensions;
 
 namespace SSA.Data.Core.BaseRepo
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : EntityObject
     {
         protected DbContext Db;
         protected DbSet<T> DbSet;
@@ -40,6 +41,14 @@ namespace SSA.Data.Core.BaseRepo
             foreach (var obj in objects)
                 DbSet.Remove(obj);
         }
+        public int Count(Expression<Func<T, bool>> where)
+        {
+            return DbSet.Count(where);
+        }
+        public T Get(Expression<Func<T, bool>> where)
+        {
+            return DbSet.Where(where).FirstOrDefault();
+        }
 
         public virtual T GetById(long id)
         {
@@ -49,11 +58,6 @@ namespace SSA.Data.Core.BaseRepo
         public virtual T GetById(string id)
         {
             return DbSet.Find(id);
-        }
-
-        public int Count(Expression<Func<T, bool>> where)
-        {
-            return DbSet.Count(where);
         }
 
         public Task<T> GetAsync(Expression<Func<T, bool>> where)
@@ -81,28 +85,14 @@ namespace SSA.Data.Core.BaseRepo
             return DbSet.Where(where);
         }
 
+        //public IQueryable<TResult> GetQueryable<TResult>(Expression<Func<T, bool>> where, Expression<Func<T, TResult>> select) 
+        //{
+        //    return DbSet.Where(where).OrderBy(w => "Id").Select(select);
+        //}
+      
         public void Save()
         {
             Db.SaveChanges();
-        }
-
-        ///// <summary>
-        /////     Return a paged list of entities
-        ///// </summary>
-        ///// <typeparam name="TOrder"></typeparam>
-        ///// <param name="page">Which page to retrieve</param>
-        ///// <param name="where">Where clause to apply</param>
-        ///// <param name="order">Order by to apply</param>
-        ///// <returns></returns>
-        //public virtual IPagedList<T> GetPage<TOrder>(Page page, Expression<Func<T, bool>> where, Expression<Func<T, TOrder>> order)
-        //{
-        //    var results = DbSet.OrderBy(order).Where(where).GetPage(page).ToList();
-        //    var total = DbSet.Count(where);
-        //    return new StaticPagedList<T>(results, page.PageNumber, page.PageSize, total);
-        //}
-        public T Get(Expression<Func<T, bool>> where)
-        {
-            return DbSet.Where(where).FirstOrDefault();
         }
     }
 }

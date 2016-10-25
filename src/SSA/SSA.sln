@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSA.Data.Core", "SSA.Data.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSA.Web.Core", "SSA.Web.Core\SSA.Web.Core.csproj", "{BE818380-B009-4792-8C8C-27DFB9EBD1E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSA.Core.Autofac", "SSA.Core.Autofac\SSA.Core.Autofac.csproj", "{C5AA8B21-0B09-43F0-A155-08B42C03B107}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0824CADD-6A00-485F-99E6-16C9BA923B70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,16 @@ Global
 		{BE818380-B009-4792-8C8C-27DFB9EBD1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE818380-B009-4792-8C8C-27DFB9EBD1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE818380-B009-4792-8C8C-27DFB9EBD1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5AA8B21-0B09-43F0-A155-08B42C03B107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5AA8B21-0B09-43F0-A155-08B42C03B107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5AA8B21-0B09-43F0-A155-08B42C03B107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5AA8B21-0B09-43F0-A155-08B42C03B107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{26DF1D48-CFCC-47DC-8DE0-A73357C2DB28} = {0824CADD-6A00-485F-99E6-16C9BA923B70}
+		{C5AA8B21-0B09-43F0-A155-08B42C03B107} = {0824CADD-6A00-485F-99E6-16C9BA923B70}
 	EndGlobalSection
 EndGlobal

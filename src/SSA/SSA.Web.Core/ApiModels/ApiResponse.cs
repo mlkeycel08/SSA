@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Runtime.Serialization;
 
-namespace SSA.Web.Core
+namespace SSA.Web.Core.ApiModels
 {
     [DataContract]
     public class ApiResponse<T>
@@ -18,8 +18,8 @@ namespace SSA.Web.Core
         {
         }
 
-        [DataMember]
-        public string Version => "1.0";
+        //[DataMember]
+        //public string Version => "1.0";
 
         [DataMember]
         public int StatusCode { get; set; }
@@ -27,7 +27,7 @@ namespace SSA.Web.Core
         [DataMember]
         public int ErrorCode { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(EmitDefaultValue = true)]
         public string ErrorDescription { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
