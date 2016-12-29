@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BaseRepo\BaseRepository.cs" />
     <Compile Include="BaseRepo\IBaseRepository.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IAuditedEntity.cs" />
     <Compile Include="EntityBase.cs" />

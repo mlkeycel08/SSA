@@ -16,8 +16,10 @@ namespace SSA.Web.Core.Handlers
             CancellationToken cancellationToken)
         {
             var response = await base.SendAsync(request, cancellationToken);
+            if (!request.RequestUri.AbsolutePath.Contains("/swagger"))
+                return BuildApiResponse(request, response);
 
-            return BuildApiResponse(request, response);
+            return response;
         }
 
         private static HttpResponseMessage BuildApiResponse(HttpRequestMessage request, HttpResponseMessage response)

@@ -90,6 +90,7 @@
     <Compile Include="ApiModels\ApiResponse.cs" />
     <Compile Include="ApiModels\ApiResponseException.cs" />
     <Compile Include="ApiModels\ApiLog.cs" />
+    <Compile Include="Attributes\ApiLogIgnoreAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Filters\ExceptionHandlingAttribute.cs" />
     <Compile Include="Handlers\ApiResponseHandler.cs" />

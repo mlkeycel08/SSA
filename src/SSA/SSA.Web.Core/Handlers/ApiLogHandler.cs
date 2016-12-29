@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using log4net;
 using Newtonsoft.Json;
 using SSA.Core.Extensions;
 using SSA.Web.Core.ApiModels;
+using SSA.Web.Core.Attributes;
 
 namespace SSA.Web.Core.Handlers
 {
@@ -39,9 +41,21 @@ namespace SSA.Web.Core.Handlers
                     // Update the API log entry with response info
                     apiLog.ResponseStatusCode = (int)response.StatusCode;
                     apiLog.ResponseTimestamp = DateTime.Now;
+                    var logger = LogManager.GetLogger(typeof(ApiLogHandler));
+                    var duration = apiLog.ResponseTimestamp - apiLog.RequestTimestamp;
 
                     if (response.Content != null)
                     {
+                        var content = response.Content as ObjectContent<ApiResponse<object>>;
+
+                        var x = content?.Value as ApiResponse<object>;
+
+                        if (x != null && x.Data.GetType().IsDefined(typeof(ApiLogIgnoreAttribute), true))
+                        {
+                            logger.InfoFormat("ApiLog: {0} {1} ",x.Data.GetType() + " loglanmadı (ApiLogIgnoreAttribute). \n\n", apiLog.SerializeXML());
+                            return response;
+                        }
+
                         apiLog.ResponseContentBody = response.Content.ReadAsStringAsync().Result;
                         apiLog.ResponseContentType = response.Content.Headers.ContentType.MediaType;
                         apiLog.ResponseHeaders = SerializeHeaders(response.Content.Headers);
@@ -51,8 +65,6 @@ namespace SSA.Web.Core.Handlers
                     // Save the API log entry to the database
                     //var logServ = Container.Get<ILogService>();
                     //logServ.AddLog(apiLog);
-                    var duration = apiLog.ResponseTimestamp - apiLog.RequestTimestamp;
-                    var logger = LogManager.GetLogger(typeof(ApiLogHandler));
                     logger.InfoFormat("ApiLog: {0}  Duration : {1}", apiLog.SerializeXML(), duration);
                     return response;
                 }, cancellationToken);
